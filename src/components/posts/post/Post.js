@@ -6,9 +6,9 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from './styles';
 import moment from 'moment';
 
-function Post(props) {
+function Post({ setCurrentId, post }) {
 
-    let { creator, title, message, tags, selectedFile, createAt, likeCount } = props.post;
+    let { creator, title, message, tags, selectedFile, createAt, likeCount, _id } = post;
 
     const classes = useStyles();
 
@@ -28,17 +28,18 @@ function Post(props) {
                 <Typography variant='body2' >{moment(createAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2} >
-                <Button style={{ color: "white" }} size="small" onClick={() => console.log("here")} >
+                <Button style={{ color: "white" }} size="small" onClick={() => setCurrentId(_id)} >
                     <MoreHorizIcon fontSize='medium' />
                 </Button>
             </div>
             <div className={classes.details} >
                 <Typography variant='body2' color="textSecondary" >{tags.map(tag => `#${tag} `)}</Typography>
             </div>
+            <Typography className={classes.title} variant='h5' gutterBottom >{title}</Typography>
             <CardContent>
-                <Typography className={classes.title} variant='h5' gutterBottom >{message}</Typography>
+                <Typography variant='h5' gutterBottom >{message}</Typography>
             </CardContent>
-            <CardActions className={classes.cardActionss} >
+            <CardActions className={classes.cardActions} >
                 <Button color='primary' size='small' onClick={() => console.log("wow")} >
                     <ThumbUpAltIcon fontSize='small' />
                     Like
