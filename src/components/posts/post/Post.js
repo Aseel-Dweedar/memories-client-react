@@ -3,13 +3,16 @@ import { Card, CardActions, CardMedia, Button, Typography, CardContent } from "@
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { useDispatch } from 'react-redux';
 import useStyles from './styles';
+import { deletePost } from '../../../actions/posts.js'
 import moment from 'moment';
 
 function Post({ setCurrentId, post }) {
 
     let { creator, title, message, tags, selectedFile, createAt, likeCount, _id } = post;
 
+    const dispatch = useDispatch();
     const classes = useStyles();
 
     return (
@@ -45,7 +48,7 @@ function Post({ setCurrentId, post }) {
                     Like
                     {likeCount}
                 </Button>
-                <Button color='primary' size='small' onClick={() => console.log("wow")} >
+                <Button color='primary' size='small' onClick={() => dispatch(deletePost(_id))} >
                     <DeleteIcon fontSize='small' />
                     Delete
                 </Button>
