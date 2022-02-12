@@ -40,12 +40,12 @@ function Post({ setCurrentId, post }) {
             </div>
             <Typography className={classes.title} variant='h5' gutterBottom >{title}</Typography>
             <CardContent>
-                <Typography variant='body2' color='textSecondary' gutterBottom >{message}</Typography>
+                <Typography variant='body2' color='textSecondary' component='p' >{message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions} >
                 <Button color='primary' size='small' onClick={() => dispatch(likePost(_id))} >
                     <ThumbUpAltIcon fontSize='small' />
-                    {likeCount}
+                    &nbsp; {likeCount}
                 </Button>
                 <Button color='primary' size='small' onClick={() => dispatch(deletePost(_id))} >
                     <DeleteIcon fontSize='small' />
