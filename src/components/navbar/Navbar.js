@@ -17,15 +17,13 @@ function Navbar() {
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location])
+    }, [location]);
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
         navigate('/');
         setUser(null);
     }
-
-    console.log(user);
 
     return (
         <AppBar className={classes.appBar} position='static' color='inherit' >
