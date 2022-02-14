@@ -33,11 +33,9 @@ const Auth = () => {
         }
     }
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleShowPassword = () => setShowPassword((previousShowPassword) => !previousShowPassword);
+    const handleShowPassword = () => setShowPassword(!showPassword);
 
     const switchMode = () => {
         setIsSignup((previousIsSignup) => !previousIsSignup)
@@ -56,7 +54,7 @@ const Auth = () => {
         }
     }
 
-    const googleError = () => console.log("Google Sign In was unsuccessful, Try again later");
+    const googleError = () => alert("Google Sign In was unsuccessful, Try again later");
 
     return (
         <Container component='main' maxWidth='xs'  >
