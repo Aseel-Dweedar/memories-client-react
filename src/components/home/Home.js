@@ -18,7 +18,8 @@ function Home() {
 
     const [currentId, setCurrentId] = useState(0);
     const [search, setSearch] = useState("");
-    console.log(search);
+    const [tags, setTags] = useState([]);
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -30,6 +31,24 @@ function Home() {
     useEffect(() => {
         dispatch(getPosts())
     }, [dispatch, currentId]);
+
+    const searchPost = () => {
+        if (search.trim()) {
+            // fetch Posts
+        } else {
+            navigate('/')
+        }
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' /* also works as (e.which === 13) */) {
+            searchPost();
+        }
+    }
+
+    const handelAdd = (tag) => setTags([...tags, tag]);
+
+    const handelDelete = (tagToDelete) => setTags(tags.filter(tag => tag != tagToDelete))
 
     return (
         <Grow in >
@@ -44,9 +63,20 @@ function Home() {
                                 name='search'
                                 variant='outlined'
                                 label='Search Memories'
+                                onKeyPress={handleKeyPress}
                                 fullWidth
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)} />
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            <ChipInput
+                                style={{ margin: '10px 0px' }}
+                                value={tags}
+                                onAdd={handelAdd}
+                                onDelete={handelDelete}
+                                label="Search Tags"
+                                variant='outlined'
+                            />
+                            <Button onClick={searchPost} className={classes.searchButton} color='primary' variant='contained' >Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper className={classes.pagination} elevation={6} >
