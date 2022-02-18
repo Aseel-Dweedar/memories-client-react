@@ -4,6 +4,8 @@ const posts = (posts = [], action) => {
     switch (action.type) {
         case actions.FETCH_ALL:
             return action.payload;
+        case actions.SEARCH:
+            return action.payload;
         case actions.CREATE:
             return [...posts, action.payload];
         case actions.UPDATE:
