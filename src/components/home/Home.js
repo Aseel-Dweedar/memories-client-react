@@ -26,6 +26,7 @@ function Home() {
     const query = useQuery();
 
     const page = query.get('page') || 1;
+    const searchQuery = query.get('searchQuery');
 
     const searchPost = () => {
         if (search.trim() || tags) {
@@ -75,9 +76,11 @@ function Home() {
                             <Button onClick={searchPost} className={classes.searchButton} color='primary' variant='contained' >Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        <Paper className={classes.pagination} elevation={6} >
-                            <Paginate page={page} />
-                        </Paper>
+                        {(!searchQuery && !tags.length) && (
+                            <Paper className={classes.pagination} elevation={6} >
+                                <Paginate page={page} />
+                            </Paper>
+                        )}
                     </Grid>
                 </Grid>
             </Container>

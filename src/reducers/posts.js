@@ -1,18 +1,22 @@
 import * as actions from '../actions/types';
 
-const posts = (state = [], action) => {
+const posts = (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
+        case actions.START_LOADING:
+            return { ...state, isLoading: true };
+        case actions.END_LOADING:
+            return { ...state, isLoading: false };
         case actions.FETCH_ALL:
             const { data: posts, currentPage, numberOfPages } = action.payload;
             return { ...state, posts, currentPage, numberOfPages };
         case actions.SEARCH:
             return { ...state, posts: action.payload };
         case actions.CREATE:
-            return [...state, action.payload];
+            return { ...state, posts: [...state.posts, action.payload] }
         case actions.UPDATE:
-            return state.map((post) => post._id === action.payload._id ? action.payload : post);
+            return { ...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post) }
         case actions.DELETE:
-            return state.filter(post => post._id !== action.payload);
+            return { ...state, posts: state.posts.filter(post => post._id !== action.payload) }
         default:
             return state;
     }

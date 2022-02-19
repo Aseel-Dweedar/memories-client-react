@@ -27,7 +27,7 @@ function Navbar() {
         }
 
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location, user.token]);
+    }, [location]);
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
