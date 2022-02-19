@@ -7,11 +7,11 @@ import useStyles from './styles';
 
 function Posts({ setCurrentId }) {
 
-    const posts = useSelector((state) => state.posts);
+    const { posts } = useSelector((state) => state.posts);
     const classes = useStyles();
 
     return (
-        !posts.length ? <CircularProgress /> : (
+        !posts?.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems='stretch' spacing={3}>
                 {posts.map(post => (
                     <Grid key={post._id} xs={12} sm={6} lg={4} item >

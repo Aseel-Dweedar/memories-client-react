@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from "@material-ui/core";
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
-import { getPosts, getPostsBySearch } from '../../actions/posts.js'
+import { getPostsBySearch } from '../../actions/posts.js'
 import useStyles from './styles';
 import Form from '../form/Form.js'
 import Posts from '../posts/Posts.js'
@@ -26,11 +26,6 @@ function Home() {
     const query = useQuery();
 
     const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery');
-
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [dispatch, currentId]);
 
     const searchPost = () => {
         if (search.trim() || tags) {
@@ -49,7 +44,7 @@ function Home() {
 
     const handelAdd = (tag) => setTags([...tags, tag]);
 
-    const handelDelete = (tagToDelete) => setTags(tags.filter(tag => tag != tagToDelete))
+    const handelDelete = (tagToDelete) => setTags(tags.filter(tag => tag !== tagToDelete))
 
     return (
         <Grow in >
@@ -81,7 +76,7 @@ function Home() {
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper className={classes.pagination} elevation={6} >
-                            <Paginate />
+                            <Paginate page={page} />
                         </Paper>
                     </Grid>
                 </Grid>
