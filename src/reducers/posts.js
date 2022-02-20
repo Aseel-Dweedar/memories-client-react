@@ -9,6 +9,8 @@ const posts = (state = { isLoading: true, posts: [] }, action) => {
         case actions.FETCH_ALL:
             const { data: posts, currentPage, numberOfPages } = action.payload;
             return { ...state, posts, currentPage, numberOfPages };
+        case actions.FETCH_POST:
+            return { ...state, post: action.payload };
         case actions.SEARCH:
             return { ...state, posts: action.payload };
         case actions.CREATE:
