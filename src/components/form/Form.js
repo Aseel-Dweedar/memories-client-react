@@ -3,6 +3,8 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import useStyles from './styles';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { createPost, updatePost } from '../../actions/posts.js';
 
 function Form({ setCurrentId, currentId }) {
@@ -11,11 +13,12 @@ function Form({ setCurrentId, currentId }) {
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem('profile'));
 
     // get data to display in the form automatically when update
-    const post = useSelector((state) => currentId ? state.posts.find(p => p._id === currentId) : null);
+    const post = useSelector((state) => currentId ? state.posts.posts.find(p => p._id === currentId) : null);
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -31,7 +34,7 @@ function Form({ setCurrentId, currentId }) {
         e.preventDefault();
 
         if (currentId === 0) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }));
+            dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
             clear();
         } else {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
